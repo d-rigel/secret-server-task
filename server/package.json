@@ -19,6 +19,8 @@
     "mongoose": "^6.2.9",
     "mongoose-int32": "^0.6.0",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.15"
+    "nanoid": "^3.3.2",
+    "nodemon": "^2.0.15",
+    "uuidv4": "^6.2.13"
   }
 }

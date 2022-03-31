@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 require("dotenv").config();
-const { insertSecret } = require("./model/Secret.model");
+const { insertSecret, getSecretByHash } = require("./model/Secret.model");
 const { encrypt, decrypt } = require("./utils/encryptionHandlers");
 
 //handle cors errors
@@ -33,6 +33,23 @@ app.post("/v1/secret", async (req, res) => {
         message: "new secret created and will expire in 60 seconds",
       });
     }
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
+
+app.get(`/v1/secret/:hash`, async (req, res) => {
+  try {
+    const { hash } = req.params;
+    const result = await getSecretByHash(hash);
+    console.log(result);
+    return res.json({
+      status: "success",
+      result,
+    });
   } catch (error) {
     res.json({
       status: "error",
