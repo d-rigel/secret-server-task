@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, useEffect } from "react";
+import { Header } from "./components/Header";
+import Axios from "axios";
+import { SecretPage } from "./components/SecretPage";
 
 function App() {
+  const [secretList, setSecretList] = useState([]);
+  const [hashList, setHashList] = useState([]);
+
+  useEffect(() => {}, [hashList, secretList]);
+
+  const addSecret = (secret) => {
+    Axios.post("/v1/secret", {
+      secret,
+    }).then((res) => {
+      const { result } = res.data;
+      setSecretList(result?.hash);
+    });
+  };
+
+  const getSecret = (hash) => {
+    Axios.get(`/v1/secret/${hash}`).then((res) => {
+      const { result } = res.data;
+
+      console.log(result);
+      setHashList(result);
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <SecretPage
+        addSecret={addSecret}
+        getSecret={getSecret}
+        secretList={secretList}
+        hashList={hashList}
+      />
+    </>
   );
 }
 

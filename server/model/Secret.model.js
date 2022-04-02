@@ -1,5 +1,6 @@
 const { SecretSchema } = require("./Secret.schema");
 
+//creating a secret
 const insertSecret = (secretObj) => {
   return new Promise((resolve, reject) => {
     try {
@@ -13,6 +14,7 @@ const insertSecret = (secretObj) => {
   });
 };
 
+//getting a single secret
 const getSecretByHash = (hash) => {
   return new Promise((resolve, reject) => {
     try {
@@ -25,7 +27,21 @@ const getSecretByHash = (hash) => {
   });
 };
 
+//Getting all secrets
+const getSecretAllSecrets = () => {
+  return new Promise((resolve, reject) => {
+    try {
+      SecretSchema.find()
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   insertSecret,
   getSecretByHash,
+  getSecretAllSecrets,
 };

@@ -3,7 +3,11 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 require("dotenv").config();
-const { insertSecret, getSecretByHash } = require("./model/Secret.model");
+const {
+  insertSecret,
+  getSecretByHash,
+  getSecretAllSecrets,
+} = require("./model/Secret.model");
 const { encrypt, decrypt } = require("./utils/encryptionHandlers");
 
 //handle cors errors
@@ -21,6 +25,7 @@ app.use(morgan("tiny"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+//api to add a secret
 app.post("/v1/secret", async (req, res) => {
   try {
     const { secret } = req.body;
@@ -29,6 +34,7 @@ app.post("/v1/secret", async (req, res) => {
     const result = await insertSecret(secretObj);
     if (result) {
       return res.json({
+        result,
         status: "success",
         message: "new secret created and will expire in 60 seconds",
       });
@@ -41,11 +47,28 @@ app.post("/v1/secret", async (req, res) => {
   }
 });
 
+//api to get a single secret
 app.get(`/v1/secret/:hash`, async (req, res) => {
   try {
     const { hash } = req.params;
     const result = await getSecretByHash(hash);
     console.log(result);
+    return res.json({
+      status: "success",
+      result,
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
+
+//api to get all secrets:  NB: not in the guideline documentation
+app.get("/v1/showSecrets", async (req, res) => {
+  try {
+    const result = await getSecretAllSecrets();
     return res.json({
       status: "success",
       result,
