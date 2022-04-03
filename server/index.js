@@ -1,17 +1,17 @@
 const express = require("express");
 const app = express();
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
 const cors = require("cors");
 const morgan = require("morgan");
 require("dotenv").config();
-const {
-  insertSecret,
-  getSecretByHash,
-  getSecretAllSecrets,
-} = require("./model/Secret.model");
+const { insertSecret, getSecretByHash } = require("./model/Secret.model");
 const { encrypt, decrypt } = require("./utils/encryptionHandlers");
+const swaggerDocument = YAML.load("./swagger.yaml");
 
 //handle cors errors
 app.use(cors());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //inporting mongodb
 const connectDB = require("./config/db");
@@ -28,9 +28,13 @@ app.use(express.json());
 //api to add a secret
 app.post("/v1/secret", async (req, res) => {
   try {
-    const { secret } = req.body;
-    const hashText = encrypt(secret);
-    const secretObj = { secret: hashText.text, iv: hashText.iv };
+    const { secretText, expireAfter } = req.body;
+    const hashText = encrypt(secretText);
+    const secretObj = {
+      secretText: hashText.text,
+      iv: hashText.iv,
+      expireAfter,
+    };
     const result = await insertSecret(secretObj);
     if (result) {
       return res.json({
@@ -53,22 +57,6 @@ app.get(`/v1/secret/:hash`, async (req, res) => {
     const { hash } = req.params;
     const result = await getSecretByHash(hash);
     console.log(result);
-    return res.json({
-      status: "success",
-      result,
-    });
-  } catch (error) {
-    res.json({
-      status: "error",
-      message: error.message,
-    });
-  }
-});
-
-//api to get all secrets:  NB: not in the guideline documentation
-app.get("/v1/showSecrets", async (req, res) => {
-  try {
-    const result = await getSecretAllSecrets();
     return res.json({
       status: "success",
       result,

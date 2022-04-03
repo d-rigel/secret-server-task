@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Header } from "./components/Header";
 import Axios from "axios";
 import { SecretPage } from "./components/SecretPage";
@@ -8,11 +8,10 @@ function App() {
   const [secretList, setSecretList] = useState([]);
   const [hashList, setHashList] = useState([]);
 
-  useEffect(() => {}, [hashList, secretList]);
-
-  const addSecret = (secret) => {
+  const addSecret = (secretText, expireAfter) => {
     Axios.post("/v1/secret", {
-      secret,
+      secretText,
+      expireAfter,
     }).then((res) => {
       const { result } = res.data;
       setSecretList(result?.hash);

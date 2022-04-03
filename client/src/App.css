@@ -1,7 +1,6 @@
 body {
   margin: 0;
   font-family: "Josefin Sans", sans-serif;
-  /* font-family: 'Open Sans', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 17px;
@@ -53,6 +52,11 @@ body {
   color: #ffffff;
 }
 
+.form-container_form,
+.form-container_form2 {
+  flex-direction: column;
+}
+
 .form-container_form button:hover {
   color: #0b0785;
   background-color: #dedcd7;
@@ -72,4 +76,41 @@ body {
 
 .display p {
   color: #0b0785;
+}
+
+.borderLine {
+  border: #ffffff 1px solid;
+  display: none;
+}
+
+/* responsiveness */
+
+@media (max-width: 991.98px) {
+  .borderLine {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  /* .display {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  } */
+  .borderLine {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .borderLine {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .display {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 }

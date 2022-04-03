@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 export const GetSecret = ({ getSecret, newSecret }) => {
   const [hash, setHash] = useState("");
@@ -14,7 +14,7 @@ export const GetSecret = ({ getSecret, newSecret }) => {
       <>
         <div className="title">
           <h3>Type in and submit your hash</h3>
-          <p>NB: your hash is valid for only 60 seconds </p>
+          <p>NB: Hash not valid after expire time! </p>
         </div>
         <div className="form-container2  align-items-center">
           <form
@@ -27,7 +27,7 @@ export const GetSecret = ({ getSecret, newSecret }) => {
             />
             <button type="submit">submit</button>
           </form>
-          <div className="display mt-3">
+          <div className="display mt-3 mb-4">
             {newSecret ? (
               <p>
                 your secret:
@@ -43,7 +43,7 @@ export const GetSecret = ({ getSecret, newSecret }) => {
   );
 };
 
-GetSecret.protoTypes = {
-  getSecret: PropTypes.func.isRequired,
-  newSecret: PropTypes.string.isRequired,
-};
+// GetSecret.protoTypes = {
+//   getSecret: PropTypes.func.isRequired,
+//   newSecret: PropTypes.string.isRequired,
+// };

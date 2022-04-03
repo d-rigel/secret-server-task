@@ -21,6 +21,8 @@
     "morgan": "^1.10.0",
     "nanoid": "^3.3.2",
     "nodemon": "^2.0.15",
-    "uuidv4": "^6.2.13"
+    "swagger-ui-express": "^4.3.0",
+    "uuidv4": "^6.2.13",
+    "yamljs": "^0.3.0"
   }
 }

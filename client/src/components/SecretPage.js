@@ -7,7 +7,7 @@ export const SecretPage = ({ addSecret, getSecret, secretList, hashList }) => {
     const check = hashList.length ? (
       hashList.map((sec, i) => {
         return (
-          <GetSecret newSecret={sec.secret} key={i} getSecret={getSecret} />
+          <GetSecret newSecret={sec.secretText} key={i} getSecret={getSecret} />
         );
       })
     ) : (
@@ -22,6 +22,7 @@ export const SecretPage = ({ addSecret, getSecret, secretList, hashList }) => {
           <div className="col-lg-6 col-md-12">
             <StoreSecret addSecret={addSecret} secretList={secretList} />
           </div>
+
           <div className="col-lg-6 col-md-12">{mapFunction()}</div>
         </div>
       </div>

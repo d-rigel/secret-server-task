@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 
 export const StoreSecret = ({ addSecret, secretList }) => {
   const [secret, setSecret] = useState("");
+  const [expireAfter, setExpireAfter] = useState("");
 
   const submitSecret = (e) => {
     e.preventDefault();
-    addSecret(secret);
-    setSecret();
+    addSecret(secret, expireAfter);
+    setSecret("");
+    setExpireAfter("");
   };
 
   return (
@@ -19,11 +21,16 @@ export const StoreSecret = ({ addSecret, secretList }) => {
       <form
         onSubmit={submitSecret}
         className="form-container  align-items-center">
-        <div className="form-container_form col-md-12 col-sm-12 col-lg-12 col-11 d-flex ">
+        <div className="form-container_form col-md-12 col-sm-12 col-lg-12 col-11 d-flex">
           <input
             type="text"
             placeholder="Type in your secret"
             onChange={(e) => setSecret(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Expire time in seconds"
+            onChange={(e) => setExpireAfter(e.target.value)}
           />
           <button type="submit">submit</button>
         </div>
@@ -33,11 +40,12 @@ export const StoreSecret = ({ addSecret, secretList }) => {
           This is your hash: <span>{secretList}</span>{" "}
         </p>
       </div>
+      <div className="borderLine"></div>
     </>
   );
 };
 
-StoreSecret.propTypes = {
-  addSecret: PropTypes.func.isRequired,
-  secretList: PropTypes.string.isRequired,
-};
+// StoreSecret.propTypes = {
+//   addSecret: PropTypes.func.isRequired,
+//   secretList: PropTypes.string.isRequired,
+// };
