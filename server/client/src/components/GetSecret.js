@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-// import PropTypes from "prop-types";
-
+import PropTypes from "prop-types";
 export const GetSecret = ({ getSecret, newSecret }) => {
   const [hash, setHash] = useState("");
 
@@ -43,7 +42,7 @@ export const GetSecret = ({ getSecret, newSecret }) => {
   );
 };
 
-// GetSecret.protoTypes = {
-//   getSecret: PropTypes.func.isRequired,
-//   newSecret: PropTypes.string.isRequired,
-// };
+GetSecret.propTypes = {
+  getSecret: PropTypes.func,
+  newSecret: PropTypes.string,
+};

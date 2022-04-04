@@ -9,11 +9,6 @@ const SecretSchema = new Schema({
     default: () => nanoid(7),
     index: { unique: true },
   },
-  // expireAfter: {
-  //   type: Date,
-  //   expires: "60s",
-  //   default: Date.now,
-  // },
   expireAfter: {
     type: Date,
     required: true,

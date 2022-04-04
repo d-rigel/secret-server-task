@@ -14,7 +14,7 @@ const encrypt = (text) => {
   };
 };
 
-//function to decrypt secret
+// function to decrypt secret // to be used if i want to decrypt the secret and i need another endpoint for it
 const decrypt = (encryption) => {
   const decipher = crypto.createCipheriv(
     "aes-256-ctr",
@@ -30,4 +30,4 @@ const decrypt = (encryption) => {
   return decryptedText.toString();
 };
 
-module.exports = { encrypt, decrypt };
+module.exports = { encrypt };

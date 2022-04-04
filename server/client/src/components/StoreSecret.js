@@ -8,8 +8,8 @@ export const StoreSecret = ({ addSecret, secretList }) => {
   const submitSecret = (e) => {
     e.preventDefault();
     addSecret(secret, expireAfter);
-    setSecret("");
-    setExpireAfter("");
+    setSecret();
+    setExpireAfter();
   };
 
   return (
@@ -45,7 +45,7 @@ export const StoreSecret = ({ addSecret, secretList }) => {
   );
 };
 
-// StoreSecret.propTypes = {
-//   addSecret: PropTypes.func.isRequired,
-//   secretList: PropTypes.string.isRequired,
-// };
+StoreSecret.propTypes = {
+  addSecret: PropTypes.func,
+  secretList: PropTypes.string,
+};

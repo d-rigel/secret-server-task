@@ -6,11 +6,12 @@ const cors = require("cors");
 const morgan = require("morgan");
 require("dotenv").config();
 const { insertSecret, getSecretByHash } = require("./model/Secret.model");
-const { encrypt, decrypt } = require("./utils/encryptionHandlers");
-const swaggerDocument = YAML.load("./swagger.yaml");
+const { encrypt } = require("./utils/encryptionHandlers");
+const swaggerDocument = YAML.load("../swagger.yaml");
 
 //handle cors errors
 app.use(cors());
+//serving swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //inporting mongodb

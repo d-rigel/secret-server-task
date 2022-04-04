@@ -27,21 +27,7 @@ const getSecretByHash = (hash) => {
   });
 };
 
-//Getting all secrets
-const getSecretAllSecrets = () => {
-  return new Promise((resolve, reject) => {
-    try {
-      SecretSchema.find()
-        .then((data) => resolve(data))
-        .catch((error) => reject(error));
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
-
 module.exports = {
   insertSecret,
   getSecretByHash,
-  getSecretAllSecrets,
 };
