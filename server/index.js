@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
 const cors = require("cors");
@@ -68,6 +69,13 @@ app.get(`/v1/secret/:hash`, async (req, res) => {
       message: error.message,
     });
   }
+});
+
+//step 1
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
