@@ -69,7 +69,11 @@ app.get(`/v1/secret/:hash`, async (req, res) => {
       message: error.message,
     });
   }
-});
+}); 
+
+app.get("/", (req, res) => {
+  res.json({"message": "healthy connection"})
+})
 
 //step 1
 app.use(express.static(path.resolve(__dirname, "./client/build")));

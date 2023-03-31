@@ -12,7 +12,7 @@ const SecretSchema = new Schema({
   expireAfter: {
     type: Date,
     required: true,
-    expires: 0,
+    default: new Date()
   },
   secretText: {
     type: String,
