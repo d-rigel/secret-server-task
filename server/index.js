@@ -75,13 +75,13 @@ app.get("/", (req, res) => {
   res.json({"message": "healthy connection"})
 })
 
-//step 1
-app.use(express.static(path.resolve(__dirname, "./client/build")));
-// Step 2:
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
+// //step 1
+// app.use(express.static(path.resolve(__dirname, "./client/build")));
+// // Step 2:
+// app.get("*", function (request, response) {
+//   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+// });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => console.log(`server started on port ${PORT}`));
